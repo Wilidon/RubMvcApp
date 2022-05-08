@@ -1,3 +1,4 @@
 /packages
 /RubMvcApp/bin/*
 /RubMvcApp/obj/*
+*.suo
