@@ -28,9 +28,17 @@ function createTable(data) {
     container.insertAdjacentHTML("beforeend", html);
 }
 
+function showButton() {
+    const form = document.querySelector('[class="createOrder"]');
+    const btn = form.querySelector('[class="btn"]');
+    console.log(btn);
+    btn.type="submit";
+}
+
 const form = document.querySelector('[class="form_for_item"]');
 form.addEventListener("submit", (event)=> {
     event.preventDefault();
+    showButton();
     const itemName = form.querySelector('[name="Name"]'), 
         amount = form.querySelector('[name="Amount"]'), 
         comment = form.querySelector('[name="Comment"]');
