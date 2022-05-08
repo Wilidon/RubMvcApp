@@ -25,33 +25,20 @@ namespace RubApp.Models {
     }
 
 
-public class ApplicationContext : DbContext
-{
-    public DbSet<Item> Items { get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<CatalogOfItems> CatalogOfItems { get; set; }
+    public class ApplicationContext : DbContext
+    {
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<CatalogOfItems> CatalogOfItems { get; set; }
 
-    static ApplicationContext()
-    {
-        Database.SetInitializer<ApplicationContext>(new MyContextInitializer());
+        static ApplicationContext()
+        {
+            // Инициализация базы данных при первом запуске
+            Database.SetInitializer<ApplicationContext>(new MyContextInitializer());
+        }
+        public ApplicationContext()
+            : base("DefaultConnection")
+        {
+        }
     }
-    public ApplicationContext()
-        : base("DefaultConnection")
-    {
-        // this.Database.Delete();
-        //this.Database.Create();
-        // Database.EnsureDeleted();
-        //Database.EnsureCreated();
-    }
-
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    {
-        /* modelBuilder.Entity<CatalogOfItems>().HasData(
-            new CatalogOfItems { Id = 1, Name = "Стол" },
-            new CatalogOfItems { Id = 2, Name = "Стул" },
-            new CatalogOfItems { Id = 3, Name = "Калькулятор" },
-            new CatalogOfItems { Id = 4, Name = "Ведро" },
-            new CatalogOfItems { Id = 5, Name = "Веник" }); */
-    }
-}
 }

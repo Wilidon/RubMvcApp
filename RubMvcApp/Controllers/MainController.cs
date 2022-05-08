@@ -12,9 +12,6 @@ namespace RubMvcApp.Controllers
 {
     public class MainController : Controller
     {
-        //
-        // GET: /Main/
-
         private IMainService _mainService;
 
         public MainController()
@@ -44,6 +41,7 @@ namespace RubMvcApp.Controllers
 
         public ActionResult Report(string Date, int page = 1)
         {
+            // Опредлеяем месяц для отчета
             int year, month;
             if (Date == null)
             {
@@ -57,13 +55,14 @@ namespace RubMvcApp.Controllers
                 year = Convert.ToInt32(year_month[0]);
                 month = Convert.ToInt32(year_month[1]);
             }
-
+            // Настраивает отображение месяца и года в таблице отчета
             ViewBag.MonthNames = _mainService.GetMonthNames();
             ViewBag.OrderDateYear = year;
             ViewBag.OrderDateMonth = month;
             ViewBag.OrderDate = string.Format("{0}-{1}", year,  month < 10 ? "0" + month.ToString() : month.ToString());
             ViewBag.Orders = _mainService.GetOrder(year, month);
 
+            // Настраиваем пагинацию страниц
             int pageSize = 3;
             List<Order> items = _mainService.GetOrdersByPage(page);
             var count = _mainService.GetAmountOrders();

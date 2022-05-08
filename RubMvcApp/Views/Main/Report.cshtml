@@ -40,7 +40,7 @@
         <div class="item_container">
             @foreach (var order in Model.Orders)
             {
-                <h4>Время создания заявки: @order.DateTime</h4>
+                <h4>Время создания заявки: @order.LocalDateTime</h4>
                 foreach (var item in order.Items)
                 {
                     <div class="item">

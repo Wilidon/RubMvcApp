@@ -14,6 +14,13 @@ namespace RubApp.Models
         [Column("datetime")]
         public DateTime DateTime { set; get; }
         public List<Item> Items { set; get; }
+        // Локальное время заявки
+        [NotMapped]
+        public DateTime LocalDateTime
+        {
+            get { return DateTime.AddHours(4); }
+            set { LocalDateTime = DateTime;}
 
+        }
     }
 }
