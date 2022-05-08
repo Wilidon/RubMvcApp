@@ -1,0 +1,40 @@
+﻿@model RubApp.Models.Item
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Список заявок</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div class="main_container">
+        <div class="container_block">
+            <a href="/Main/Report">Создать отчет</a><br />
+
+            <h2> Создать заявку </h2> <br />
+            <div class="form">
+                <p> Предмет</p>
+                <form class="form_for_item" method="get" action="/Main/Index">
+                    <div class="grid_container">
+                        <span class="form_block1">
+                            @Html.DropDownList("Name", ViewBag.CatalogOfItems as SelectList)
+                            <input class="input" type="number" name="Amount" placeholder="0" />
+                        </span>
+                        <textarea class="input" name="Comment" placeholder="Комментарий"></textarea> <br />
+
+                    </div>
+                    <input class="btn" type="submit" value="Добавить к заявке">
+                </form>
+            </div>
+            <div class="card">
+                <form method="get" action="/Main/Create" class="createOrder">
+                    <div class="item_container">
+
+                    </div>
+                    <input class="btn" type="submit" value="Создать заявку">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

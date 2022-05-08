@@ -1,0 +1,76 @@
+﻿@using System.Globalization
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <p>    <a href="/Main/Index"> Назад </a></p>
+<div class="main_container">
+    <div class="report_container">
+        <div class="change_input">
+            <form href="/Main/Report" method="post" novalidate="novalidate">
+                <input name="Date" type="month" value="@ViewBag.OrderDate" />
+                <input type="submit" value="Создать отчет" />
+            </form>
+        </div>
+        <table class="table">
+            <caption>
+                Отчет за @ViewBag.MonthNames[@ViewBag.OrderDateMonth - 1] | @ViewBag.OrderDateYear
+            </caption>
+            <tr class="table_row">
+                <th class="table_block">Название</th>
+                <th class="table_block">Количество</th>
+            </tr>
+            @foreach (var order in ViewBag.Orders)
+            {
+                <tr class="table_row">
+                    <td class="table_block">@order.Key</td>
+                    <td>@order.Value</td>
+                </tr>
+
+            }
+        </table>
+    </div>
+    <div class="history_container">
+        <p>Станица @Model.PageViewModel.PageNumber</p>
+        <div class="item_container">
+            @foreach (var order in Model.Orders)
+            {
+                <h4>Время создания заявки: @order.DateTime</h4>
+                foreach (var item in order.Items)
+                {
+                    <div class="item">
+                        <div class="item_row">
+                            <span class="tool">@item.ItemName</span>
+                            <span class="amount">@item.Amount</span>
+                        </div>
+                        <div class="item_row">
+                            <span class="comment">@item.Comment</span>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="history_form_btn">
+            @if (Model.PageViewModel.HasPreviousPage())
+            {
+                <form class="history_form" action="/Main/Report" method="get" novalidate="novalidate">
+                    <input name="page" value="@(Model.PageViewModel.PageNumber - 1)" hidden="hidden" />
+                    <input class="btn" type="submit" value="Назад">
+                </form>
+            }
+            @if (Model.PageViewModel.HasNextPage())
+{
+    <form class="history_form " action="/Main/Report" method="get" novalidate="novalidate">
+        <input name="page" value="@(Model.PageViewModel.PageNumber + 1)" hidden="hidden" />
+        <input class="btn history_right_btn_form" type="submit" value="Вперед">
+    </form>
+}
+        </div>
+    </div>
+</body>
+</html>
